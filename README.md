@@ -6,8 +6,6 @@ A simple melter block that turn blocks into liquid.
     
 Wish there was an easier way to get your lava rather than scooping buckets and trudging through the snow for 5 miles before breakfast?  Are you an older MC user who misses the cobble to lava cauldrons of old days of yore?  The Melter may be your favorite new machine block!
 
-![Melter Showcase](https://media.forgecdn.net/attachments/thumbnails/689/709/310/172/melterama2.png)
-
 To place blocks into the Melter drop them in, or push them in using pipes from a storage location.  Holding blocks in hand to right-click-mouse insert will not work.  Only blocks with recipes can be dropped-in / inserted.
 
 ## Some initial melting recipes are included - additional recipes can be easily added by datapack or using a KubeJS script, see below!
