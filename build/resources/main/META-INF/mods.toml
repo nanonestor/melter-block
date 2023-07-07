@@ -1,0 +1,53 @@
+modLoader="javafml"
+loaderVersion="[40,)"
+issueTrackerURL="https://github.com/nanonestor/melter-block/issues"
+license="MIT"
+
+[[mods]]
+modId="melter"
+version="${file.jarVersion}"
+displayName="Melter"
+logoFile="logo.png"
+credits="Code inspirtation from the amazing Create mod"
+authors="oierbravo, nanonestor"
+description='''
+A simple melter block that turn blocks into liquid.
+Intended for modpacks. Use as you see fit.
+'''
+# A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
+[[dependencies.melter]]
+    modId="forge"
+    mandatory=true
+    versionRange="[40.2.4,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.melter]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.18.2,1.19)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.melter]]
+    modId="kubejs"
+    mandatory=false
+    versionRange="[1802.5,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.melter]]
+    modId="create"
+    mandatory=false
+    versionRange="[0.5.1,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.melter]]
+    modId="productivebees"
+    mandatory=false
+    versionRange="[0.9,)"
+    ordering="NONE"
+    side="BOTH"
+
+
