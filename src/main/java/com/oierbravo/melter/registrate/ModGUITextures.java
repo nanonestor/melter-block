@@ -2,10 +2,12 @@ package com.oierbravo.melter.registrate;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+
 import com.oierbravo.melter.foundation.gui.UIRenderHelper;
 import com.oierbravo.melter.foundation.gui.element.ScreenElement;
 import com.oierbravo.melter.foundation.utility.Color;
-import net.minecraft.client.gui.GuiComponent;
+// import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -38,7 +40,7 @@ public enum ModGUITextures implements ScreenElement {
         this.startX = startX;
         this.startY = startY;
     }
-
+/*
     @OnlyIn(Dist.CLIENT)
     public void bind() {
         RenderSystem.setShaderTexture(0, this.location);
@@ -61,4 +63,23 @@ public enum ModGUITextures implements ScreenElement {
         this.bind();
         UIRenderHelper.drawColoredTexture(ms, c, x, y, this.startX, this.startY, this.width, this.height);
     }
+    */
+
+    @OnlyIn(Dist.CLIENT)
+    public void bind() {
+        RenderSystem.setShaderTexture(0, location);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void render(GuiGraphics graphics, int x, int y) {
+        graphics.blit(location, x, y, startX, startY, width, height);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void render(GuiGraphics graphics, int x, int y, Color c) {
+        bind();
+        UIRenderHelper.drawColoredTexture(graphics, c, x, y, startX, startY, width, height);
+    }
+
+
 }

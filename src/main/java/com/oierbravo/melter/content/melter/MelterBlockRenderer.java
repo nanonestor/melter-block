@@ -2,24 +2,26 @@ package com.oierbravo.melter.content.melter;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Matrix3f;
-import com.mojang.math.Matrix4f;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
+import org.joml.Matrix3f;
+import org.joml.Matrix4f;
+
+
 
 public class MelterBlockRenderer implements BlockEntityRenderer<MelterBlockEntity> {
     public MelterBlockRenderer(BlockEntityRendererProvider.Context context) {
@@ -31,23 +33,24 @@ public class MelterBlockRenderer implements BlockEntityRenderer<MelterBlockEntit
         int amount = fluidStack.getAmount();
         int total = pBlockEntity.getFluidHandler().getTankCapacity(0);
         float percent = (amount / (float) total);
-        if(!fluidStack.isEmpty()){
+        if (!fluidStack.isEmpty()) {
 
             this.renderFluidInTank(pBlockEntity.getLevel(), pBlockEntity.getBlockPos(), fluidStack, pPoseStack, pBufferSource, percent);
         }
 
         ItemStack itemStack = pBlockEntity.getItemHandler().getStackInSlot(0);
-        if(!itemStack.isEmpty()){
+        if (!itemStack.isEmpty()) {
 
             pPoseStack.pushPose();
-            pPoseStack.translate(0.5d,  0.8d * percent, 0.5d);
+            pPoseStack.translate(0.5d, 0.8d * percent, 0.5d);
 
-            this.renderBlock(pPoseStack,pBufferSource,pPackedLight,pPackedOverlay,itemStack);
+            this.renderBlock(pPoseStack, pBufferSource, pPackedLight, pPackedOverlay, itemStack);
             pPoseStack.popPose();
         }
 
         //FluidRenderer.renderFluidBox(fluidStack,0.5f,0.5f,0.5f,0.5f,0.5f,0.5f,pBufferSource,pPoseStack,pPackedLight,false);
     }
+
     private void renderFluidInTank(BlockAndTintGetter world, BlockPos pos, FluidStack fluidStack, PoseStack matrix, MultiBufferSource buffer, float percent) {
         matrix.pushPose();
         matrix.translate(0.5d, 0.5d, 0.5d);
@@ -84,7 +87,7 @@ public class MelterBlockRenderer implements BlockEntityRenderer<MelterBlockEntit
 
         float pY = -height / 2 + percent * height;
 
-        builder.vertex(matrix4f, -width / 2, pY , -width / 2).color(r, g, b, a)
+        builder.vertex(matrix4f, -width / 2, pY, -width / 2).color(r, g, b, a)
                 .uv(minU, minV)
                 .overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(normalMatrix, 0, 1, 0)
                 .endVertex();
@@ -106,8 +109,10 @@ public class MelterBlockRenderer implements BlockEntityRenderer<MelterBlockEntit
     }
 
     protected void renderBlock(PoseStack ms, MultiBufferSource buffer, int light, int overlay, ItemStack stack) {
+        var minecraft = Minecraft.getInstance();
+
         Minecraft.getInstance()
                 .getItemRenderer()
-                .renderStatic(stack, ItemTransforms.TransformType.GROUND, light, overlay, ms, buffer, 0);
+                .renderStatic(stack, ItemDisplayContext.GROUND, light, overlay, ms, buffer, minecraft.level, 0);
     }
 }

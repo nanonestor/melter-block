@@ -9,6 +9,7 @@ import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.gui.drawable.IDrawableAnimated;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
@@ -17,6 +18,8 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -24,6 +27,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.fluids.FluidStack;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
@@ -51,7 +55,7 @@ public class MeltingRecipeCategory implements IRecipeCategory<MeltingRecipe> {
             }
 
             @Override
-            public void draw(PoseStack poseStack, int xOffset, int yOffset) {
+            public void draw(@NotNull GuiGraphics guiGraphics, int xOffset, int yOffset) {
 
             }
         };
@@ -86,8 +90,8 @@ public class MeltingRecipeCategory implements IRecipeCategory<MeltingRecipe> {
         builder.addSlot(RecipeIngredientRole.INPUT, 51, 11).addIngredients(recipe.getIngredient());
 
 
-            NonNullList<FluidStack> fluidList = NonNullList.create();
-            fluidList.add(recipe.getOutput());
+        NonNullList<FluidStack> fluidList = NonNullList.create();
+        fluidList.add(recipe.getOutput());
 
         builder.addSlot(RecipeIngredientRole.OUTPUT, 113, 11)
                 .addTooltipCallback((recipeSlotView, tooltip) -> tooltip.add(1, Component.literal(recipe.getOutput().getAmount() + "mB")) )
@@ -97,22 +101,29 @@ public class MeltingRecipeCategory implements IRecipeCategory<MeltingRecipe> {
     }
 
     @Override
-    public void draw(MeltingRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX, double mouseY) {
-        IRecipeCategory.super.draw(recipe, recipeSlotsView, stack, mouseX, mouseY);
-        ModGUITextures.JEI_SHORT_ARROW.render(stack, 75, 12);
+    public void draw(MeltingRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
+        IRecipeCategory.super.draw(recipe, recipeSlotsView, graphics, mouseX, mouseY);
+        ModGUITextures.JEI_SHORT_ARROW.render(graphics, 75, 12);
 
-        //IDrawableAnimated arrow = getArrow(recipe);
-        //arrow.draw(stack, 75, 12);
-        drawProcessingTime(recipe, stack, 81,35);
+     //   IDrawableAnimated arrow = getArrow(recipe);
+     //   arrow.draw(graphics, 75, 12);
+        drawProcessingTime(recipe, graphics, 81,35);
     }
-    protected void drawProcessingTime(MeltingRecipe recipe, PoseStack poseStack, int x, int y) {
+    protected void drawProcessingTime(MeltingRecipe recipe, GuiGraphics graphics, int x, int y) {
         int processingTime = recipe.getProcessingTime();
         if (processingTime > 0) {
             int cookTimeSeconds = processingTime / 20;
             MutableComponent timeString = Component.translatable("gui.jei.category.smelting.time.seconds", cookTimeSeconds);
             Minecraft minecraft = Minecraft.getInstance();
             Font fontRenderer = minecraft.font;
-            fontRenderer.draw(poseStack, timeString, x, y, 0xFF808080);
+         //   fontRenderer.draw, timeString, x, y, 0xFF808080);
+         //   fontRenderer.drawInBatch(timeString, x, y, graphics,0xFF808080, );
+         //   int i = 0;
+          //  float font = (float) (-fontRenderer.width(timeString) / 2);
+          //  MultiBufferSource.BufferSource buf = minecraft.renderBuffers().bufferSource();
+           // fontRenderer.drawInBatch(timeString, font, i, 0xFF808080, false, x, y, buf, false, 0xFF808080, 15728880);
+            graphics.drawString(fontRenderer, timeString, x, y, 0xFF808080);
+
         }
     }
 }

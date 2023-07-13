@@ -5,6 +5,7 @@ import com.oierbravo.melter.content.melter.MelterBlockEntity;
 import com.oierbravo.melter.content.melter.MelterBlockRenderer;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 
+
 public class ModBlockEntities {
     public static final BlockEntityEntry<MelterBlockEntity> MELTER_BLOCK_ENTITY = Melter.registrate()
             //.blockEntity(TradingStationBlockEntity::new)

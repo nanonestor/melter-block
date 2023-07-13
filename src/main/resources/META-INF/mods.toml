@@ -31,14 +31,7 @@ https://github.com/nanonestor/melter-block
 [[dependencies.melter]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.19.2,1.20)"
-    ordering="NONE"
-    side="BOTH"
-
-[[dependencies.melter]]
-    modId="jei"
-    mandatory=false
-    versionRange="[11.2.0.254,)"
+    versionRange="[1.20,)"
     ordering="NONE"
     side="BOTH"
 
@@ -46,5 +39,12 @@ https://github.com/nanonestor/melter-block
     modId="create"
     mandatory=false
     versionRange="[0.5.1,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.melter]]
+    modId="jei"
+    mandatory=false
+    versionRange="[11.2.0.254,)"
     ordering="NONE"
     side="BOTH"

@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.oierbravo.melter.Melter;
 import com.oierbravo.melter.foundation.fluid.FluidHelper;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -44,6 +45,11 @@ public class MeltingRecipe implements Recipe<SimpleContainer> {
     }
 
     @Override
+    public ItemStack assemble(SimpleContainer pContainer, RegistryAccess pRegistryAccess) {
+        return null;
+    }
+
+
     public ItemStack assemble(SimpleContainer pContainer) {
         return null;
     }
@@ -54,6 +60,11 @@ public class MeltingRecipe implements Recipe<SimpleContainer> {
     }
 
     @Override
+    public ItemStack getResultItem(RegistryAccess pRegistryAccess) {
+        return null;
+    }
+
+
     public ItemStack getResultItem() {
         return ItemStack.EMPTY;
     }
@@ -113,11 +124,11 @@ public class MeltingRecipe implements Recipe<SimpleContainer> {
     public static class Type implements RecipeType<MeltingRecipe> {
         private Type() { }
         public static final Type INSTANCE = new Type();
-        public static final String ID = "melting";
+        public static final String MELTING_TYPE = "melting";
     }
     public static class Serializer implements RecipeSerializer<MeltingRecipe> {
         public static final Serializer INSTANCE = new Serializer();
-        public static final ResourceLocation ID =
+        public static final ResourceLocation MELTING_TYPE =
                 new ResourceLocation(Melter.MODID,"melting");
 
         @Override

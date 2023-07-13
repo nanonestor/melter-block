@@ -7,8 +7,10 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 
+import static com.oierbravo.melter.Melter.registrate;
+
 public class ModBlocks {
-    public static final BlockEntry<MelterBlock> MELTER = Melter.registrate()
+    public static final BlockEntry<MelterBlock> MELTER = registrate().object("melter")
             .block("melter", MelterBlock::new)
             .lang("Melter")
             .blockstate((ctx, prov) ->

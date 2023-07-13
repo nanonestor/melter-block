@@ -4,9 +4,11 @@ import com.oierbravo.melter.foundation.block.ITE;
 import com.oierbravo.melter.foundation.utility.Iterate;
 import com.oierbravo.melter.registrate.ModBlockEntities;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -29,14 +31,15 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidUtil;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static net.minecraft.world.damagesource.DamageTypes.HOT_FLOOR;
 
 public class MelterBlock extends BaseEntityBlock implements ITE<MelterBlockEntity> {
     public static final EnumProperty<HeatSources> HEAT_SOURCE = EnumProperty.create("heatesource", HeatSources.class);
@@ -79,11 +82,11 @@ public class MelterBlock extends BaseEntityBlock implements ITE<MelterBlockEntit
                 LivingEntity entity = ((LivingEntity) pEntity);
                 if(pState.hasProperty(MelterBlock.HEAT_SOURCE) && pState.getValue(MelterBlock.HEAT_SOURCE) != HeatSources.NONE){
                     //entity.hurt(DamageSource.HOT_FLOOR,0.1f * pState.getValue(MelterBlock.HEAT_SOURCE).getMultiplier());
-                    entity.hurt(DamageSource.HOT_FLOOR,0.4f* pState.getValue(MelterBlock.HEAT_SOURCE).getMultiplier());
+                    entity.hurt(new DamageSource((Holder<DamageType>) HOT_FLOOR),0.1f * pState.getValue(MelterBlock.HEAT_SOURCE).getMultiplier());
+                    //entity.hurt(DamageTypes.HOT_FLOOR,0.1f * pState.getValue(MelterBlock.HEAT_SOURCE).getMultiplier());
                 }
             }
         }
-
         super.stepOn(pLevel, pPos, pState, pEntity);
     }
 
@@ -140,11 +143,11 @@ public class MelterBlock extends BaseEntityBlock implements ITE<MelterBlockEntit
         super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
     }
 
-    @Override
+
     public void updateEntityAfterFallOn(BlockGetter worldIn, Entity entityIn) {
         super.updateEntityAfterFallOn(worldIn, entityIn);
 
-        if (entityIn.level.isClientSide)
+        if (entityIn.level().isClientSide)
             return;
         if (!(entityIn instanceof ItemEntity))
             return;
@@ -160,7 +163,7 @@ public class MelterBlock extends BaseEntityBlock implements ITE<MelterBlockEntit
             return;
 
         ItemEntity itemEntity = (ItemEntity) entityIn;
-        LazyOptional<IItemHandler> capability = melter.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
+        LazyOptional<IItemHandler> capability = melter.getCapability(ForgeCapabilities.ITEM_HANDLER);
         if (!capability.isPresent())
             return;
 

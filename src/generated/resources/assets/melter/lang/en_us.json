@@ -1,7 +1,6 @@
 {
   "block.melter.melter": "Melter",
   "config.jade.plugin_melter.melter_data": "Melter data",
-  "itemGroup.Melter": "Melter",
   "melter.block.display": "Melter",
   "melter.tooltip.multiplier": "Heat multiplier: %d",
   "melter.tooltip.multiplier_none": "§cNot heated!",

@@ -14,7 +14,7 @@ import java.util.Optional;
 
 public class ModRecipes {
     public static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS =
-            DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, Melter.MODID);
+            DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, "melter");
 
 
 
