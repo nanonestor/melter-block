@@ -1,6 +1,5 @@
 package com.oierbravo.melter.compat.jei;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.oierbravo.melter.Melter;
 import com.oierbravo.melter.content.melter.MeltingRecipe;
 import com.oierbravo.melter.registrate.ModBlocks;
@@ -19,7 +18,10 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
+<<<<<<< Updated upstream
 import net.minecraft.client.renderer.MultiBufferSource;
+=======
+>>>>>>> Stashed changes
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -28,18 +30,17 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
+<<<<<<< Updated upstream
 
 import javax.annotation.Nonnull;
+=======
+>>>>>>> Stashed changes
 
 public class MeltingRecipeCategory implements IRecipeCategory<MeltingRecipe> {
     public final static ResourceLocation UID = new ResourceLocation(Melter.MODID, "melting");
-    public final static ResourceLocation ARROW_TEXTURE =
-            new ResourceLocation(Melter.MODID, "textures/gui/arrow.png");
 
     private final IDrawable background;
     private final IDrawable icon;
-    //protected final IDrawableAnimated arrow;
-    //private final LoadingCache<Integer, IDrawableAnimated> cachedArrows;
 
     public MeltingRecipeCategory(IGuiHelper helper) {
         //this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 59);
@@ -65,48 +66,57 @@ public class MeltingRecipeCategory implements IRecipeCategory<MeltingRecipe> {
 
 
     @Override
-    public RecipeType<MeltingRecipe> getRecipeType() {
+    public @NotNull RecipeType<MeltingRecipe> getRecipeType() {
         return RecipeType.create("melter","melting", MeltingRecipe.class);
     }
 
     @Override
-    public Component getTitle() {
+    public @NotNull Component getTitle() {
         return Component.translatable("melting.recipe");
     }
 
+
     @Override
-    public IDrawable getBackground() {
+    public @NotNull IDrawable getBackground() {
         return this.background;
     }
 
     @Override
-    public IDrawable getIcon() {
+    public @NotNull IDrawable getIcon() {
         return this.icon;
     }
 
     @Override
-    public void setRecipe(@Nonnull IRecipeLayoutBuilder builder, @Nonnull MeltingRecipe recipe, @Nonnull IFocusGroup focusGroup) {
+    public void setRecipe(IRecipeLayoutBuilder builder, MeltingRecipe recipe, @NotNull IFocusGroup focuses) {
         Ingredient input = recipe.getIngredient();
         builder.addSlot(RecipeIngredientRole.INPUT, 51, 11).addIngredients(recipe.getIngredient());
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
         NonNullList<FluidStack> fluidList = NonNullList.create();
         fluidList.add(recipe.getOutput());
 
         builder.addSlot(RecipeIngredientRole.OUTPUT, 113, 11)
                 .addTooltipCallback((recipeSlotView, tooltip) -> tooltip.add(1, Component.literal(recipe.getOutput().getAmount() + "mB")) )
                 .addIngredients(ForgeTypes.FLUID_STACK, fluidList);
-
-
     }
 
     @Override
+<<<<<<< Updated upstream
     public void draw(MeltingRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
         IRecipeCategory.super.draw(recipe, recipeSlotsView, graphics, mouseX, mouseY);
         ModGUITextures.JEI_SHORT_ARROW.render(graphics, 75, 12);
 
      //   IDrawableAnimated arrow = getArrow(recipe);
      //   arrow.draw(graphics, 75, 12);
+=======
+    public void draw(@NotNull MeltingRecipe recipe, @NotNull IRecipeSlotsView recipeSlotsView, @NotNull GuiGraphics graphics, double mouseX, double mouseY) {
+        IRecipeCategory.super.draw(recipe, recipeSlotsView, graphics, mouseX, mouseY);
+        ModGUITextures.JEI_SHORT_ARROW.render(graphics, 75, 12);
+
+>>>>>>> Stashed changes
         drawProcessingTime(recipe, graphics, 81,35);
     }
     protected void drawProcessingTime(MeltingRecipe recipe, GuiGraphics graphics, int x, int y) {
@@ -116,12 +126,15 @@ public class MeltingRecipeCategory implements IRecipeCategory<MeltingRecipe> {
             MutableComponent timeString = Component.translatable("gui.jei.category.smelting.time.seconds", cookTimeSeconds);
             Minecraft minecraft = Minecraft.getInstance();
             Font fontRenderer = minecraft.font;
+<<<<<<< Updated upstream
          //   fontRenderer.draw, timeString, x, y, 0xFF808080);
          //   fontRenderer.drawInBatch(timeString, x, y, graphics,0xFF808080, );
          //   int i = 0;
           //  float font = (float) (-fontRenderer.width(timeString) / 2);
           //  MultiBufferSource.BufferSource buf = minecraft.renderBuffers().bufferSource();
            // fontRenderer.drawInBatch(timeString, font, i, 0xFF808080, false, x, y, buf, false, 0xFF808080, 15728880);
+=======
+>>>>>>> Stashed changes
             graphics.drawString(fontRenderer, timeString, x, y, 0xFF808080);
 
         }

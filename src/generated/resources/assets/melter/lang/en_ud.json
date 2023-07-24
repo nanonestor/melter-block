@@ -1,7 +1,12 @@
 {
   "block.melter.melter": "ɹǝʇןǝW",
   "config.jade.plugin_melter.melter_data": "ɐʇɐp ɹǝʇןǝW",
+<<<<<<< Updated upstream
+=======
+  "itemGroup.melter.melter": "ɹǝʇןǝW",
+>>>>>>> Stashed changes
   "melter.block.display": "ɹǝʇןǝW",
+  "melter.itemGroup.melter": "ʇsǝ⟘",
   "melter.tooltip.multiplier": "%d :ɹǝıןdıʇןnɯ ʇɐǝH",
   "melter.tooltip.multiplier_none": "¡pǝʇɐǝɥ ʇoNɔ§",
   "melter.tooltip.progress": "%d%% :ssǝɹboɹԀ",

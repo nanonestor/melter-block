@@ -6,10 +6,16 @@ import com.mojang.logging.LogUtils;
 import com.oierbravo.melter.content.melter.MelterBlock;
 import com.oierbravo.melter.registrate.*;
 import com.tterrag.registrate.Registrate;
+<<<<<<< Updated upstream
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
+=======
+import com.tterrag.registrate.util.entry.RegistryEntry;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraftforge.common.MinecraftForge;
+>>>>>>> Stashed changes
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -28,14 +34,23 @@ public class Melter {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public static final String MODID = "melter";
-    public static final String DISPLAY_NAME = "Melter";
 
+<<<<<<< Updated upstream
     // public static IEventBus modEventBus;
     public static Registrate registrate() {
         return registrate.get();
     }
 
     public static final NonNullSupplier<Registrate> registrate = NonNullSupplier.lazy(() -> Registrate.create(MODID));
+=======
+    public static final Registrate registrate = Registrate
+            .create("melter");
+
+    //public static final NonNullSupplier<Registrate> registrate = NonNullSupplier.lazy(() -> Registrate.create(MODID));
+    private final RegistryEntry<CreativeModeTab> meltercreativetab = registrate.object("melter")
+            .defaultCreativeTab(tab -> tab.withLabelColor(0xFF00AA00))
+            .register();
+>>>>>>> Stashed changes
     public static final boolean withCreate = ModList.get().isLoaded("create");
 
 
@@ -43,6 +58,7 @@ public class Melter {
             .disableHtmlEscaping()
             .create();
 
+<<<<<<< Updated upstream
    // public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
    // public static ResourceKey<CreativeModeTab> TAB_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation(MODID, MODID));
@@ -57,6 +73,12 @@ public class Melter {
     public Melter() {
 
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+=======
+    public  IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+    public Melter() {
+        
+>>>>>>> Stashed changes
         MinecraftForge.EVENT_BUS.register(this);
 
 
@@ -67,12 +89,29 @@ public class Melter {
 
         // CREATIVE_MODE_TABS.register(modEventBus);
 
-        registrate().addRawLang("melter.block.display", "Melter");
-        registrate().addRawLang("melting.recipe", "Melting");
-        registrate().addRawLang("melter.tooltip.progress", "Progress: %d%%");
-        registrate().addRawLang("melter.tooltip.multiplier", "Heat multiplier: %d");
-        registrate().addRawLang("melter.tooltip.multiplier_none", "§cNot heated!");
-        registrate().addRawLang("config.jade.plugin_melter.melter_data", "Melter data");
+
+        registrate.addRawLang("melter.itemGroup.melter", "Test");
+        registrate.addRawLang("melter.block.display", "Melter");
+        registrate.addRawLang("melting.recipe", "Melting");
+        registrate.addRawLang("melter.tooltip.progress", "Progress: %d%%");
+        registrate.addRawLang("melter.tooltip.multiplier", "Heat multiplier: %d");
+        registrate.addRawLang("melter.tooltip.multiplier_none", "§cNot heated!");
+        registrate.addRawLang("config.jade.plugin_melter.melter_data", "Melter data");
+
+
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onCommonSetup);
+        MinecraftForge.EVENT_BUS.addListener(this::afterServerStart);
+    }
+
+
+    private void onCommonSetup(FMLCommonSetupEvent event) {
+        MinecraftForge.EVENT_BUS.register(this);
+    //    CREATIVE_MODE_TABS.register(modEventBus);
+
+    }
+
+    private void afterServerStart(ServerStartedEvent event) {
+        MinecraftForge.EVENT_BUS.register(this);
 
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onCommonSetup);
@@ -83,11 +122,14 @@ public class Melter {
         MinecraftForge.EVENT_BUS.register(this);
         Config.register();
 
+<<<<<<< Updated upstream
     }
 
     private void afterServerStart(ServerStartedEvent event) {
 
     }
+=======
+>>>>>>> Stashed changes
 }
 
 

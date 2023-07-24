@@ -13,18 +13,18 @@ authors="nanonestor"
 description='''
 A simple melter block that turn blocks into liquid.
 Intended for modpacks. Use as you see fit.
--
+
 Recipes easily added via datapack or KubeJS - See project Curseforge website or Github for details.
--
+
 https://legacy.curseforge.com/minecraft/mc-mods/melter-block
--
+
 https://github.com/nanonestor/melter-block
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.melter]]
     modId="forge"
     mandatory=true
-    versionRange="[43.2.4,)"
+    versionRange="[46.0.14,)"
     ordering="NONE"
     side="BOTH"
 
