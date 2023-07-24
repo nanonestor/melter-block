@@ -10,9 +10,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
@@ -26,7 +28,7 @@ public class Melter
     public static final String MODID = "melter";
     public static final String DISPLAY_NAME = "Melter";
 
-    public static IEventBus modEventBus;
+    // public static IEventBus modEventBus;
 
     public static final NonNullSupplier<Registrate> registrate = NonNullSupplier.lazy(() -> Registrate.create(MODID).creativeModeTab(ModCreativeModeTab::new, DISPLAY_NAME));
 
@@ -36,9 +38,9 @@ public class Melter
     public static final Gson GSON = new GsonBuilder().setPrettyPrinting()
             .disableHtmlEscaping()
             .create();
+    public  IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
     public Melter()
     {
-        modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
 
@@ -55,6 +57,15 @@ public class Melter
         registrate().addRawLang("melter.tooltip.multiplier_none", "§cNot heated!");
         registrate().addRawLang("config.jade.plugin_melter.melter_data", "Melter data");
 
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onCommonSetup);
+        MinecraftForge.EVENT_BUS.addListener(this::afterServerStart);
+    }
+    private void onCommonSetup(FMLCommonSetupEvent event) {
+        MinecraftForge.EVENT_BUS.register(this);
+    }
+
+    private void afterServerStart(ServerStartedEvent event) {
+        MinecraftForge.EVENT_BUS.register(this);
     }
 
 
