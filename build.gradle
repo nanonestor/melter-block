@@ -160,6 +160,7 @@ repositories {
             includeGroup "dev.architectury"
         }
     }
+    mavenCentral()
 }
 
 

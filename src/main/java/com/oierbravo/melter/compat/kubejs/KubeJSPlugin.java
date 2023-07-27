@@ -1,13 +1,13 @@
-/*
+
 package com.oierbravo.melter.compat.kubejs;
 
-import dev.latvian.mods.kubejs.recipe.RegisterRecipeTypesEvent;
-import net.minecraft.resources.ResourceLocation;
+import com.oierbravo.melter.content.melter.MeltingRecipe;
+import dev.latvian.mods.kubejs.recipe.schema.RegisterRecipeSchemasEvent;
 
 public class KubeJSPlugin extends dev.latvian.mods.kubejs.KubeJSPlugin {
-    public void registerRecipeTypes(RegisterRecipeTypesEvent event) {
-        event.register(new ResourceLocation("melter:melting"),  MeltingRecipeProcessing::new);
+    @Override
+    public void registerRecipeSchemas(RegisterRecipeSchemasEvent event) {
+        event.register(MeltingRecipe.Serializer.ID, MeltingRecipeSchema.SCHEMA);
     }
 
 }
-*/
