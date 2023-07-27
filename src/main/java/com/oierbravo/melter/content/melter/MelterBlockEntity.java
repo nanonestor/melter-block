@@ -245,14 +245,14 @@ public class MelterBlockEntity extends BlockEntity  {
             return false;
         }
 
-        int heatLevel = match.get().getHeatLevel();
+        int minimumHeat = match.get().getMinimumHeat();
 
         return match.isPresent()
                 && MelterBlockEntity.hasEnoughInputItems(inputInventory,match.get().getIngredients().get(0).getItems()[0].getCount())
                 && MelterBlockEntity.canInsertFluidAmountIntoOutput(pBlockEntity.fluidTankHandler, match.get().getOutputFluidStack(),match.get().getOutputFluidAmount())
                 && MelterBlockEntity.hasEnoughOutputSpace(pBlockEntity.fluidTankHandler,match.get().getOutputFluidAmount())
                 && MelterBlockEntity.hasHeatSourceBelow(pBlockEntity)
-                && MelterBlockEntity.hasMinimumHeatSource(heatLevel, pBlockEntity);
+                && MelterBlockEntity.hasMinimumHeatSource(minimumHeat, pBlockEntity);
 
     }
 

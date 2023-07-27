@@ -13,7 +13,7 @@ public class ModConfigCommon {
         BUILDER.push("Configs for WaterCondenser");
 
         MELTER_CAPACITY = BUILDER.comment("Tank capacity in mB")
-                .define("Condenser capacity", 1000);
+                .define("Condenser capacity", 2000);
         MELTER_FLUID_PER_TICK = BUILDER.comment("mB per tick increment")
                 .define("Fluid per tick", 2);
 

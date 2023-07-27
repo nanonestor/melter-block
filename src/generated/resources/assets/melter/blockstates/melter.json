@@ -6,6 +6,9 @@
     "heatesource=torch": {
       "model": "melter:block/melter_torch"
     },
+    "heatesource=soul_torch": {
+      "model": "melter:block/melter_soul_torch"
+    },
     "heatesource=wall_torch": {
       "model": "melter:block/melter_wall_torch"
     },

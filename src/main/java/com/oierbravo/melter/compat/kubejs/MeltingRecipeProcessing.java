@@ -30,7 +30,7 @@ public class MeltingRecipeProcessing extends RecipeJS {
     }
     public MeltingRecipeProcessing processingTime(int time) {
         json.addProperty("processingTime", time);
-        json.addProperty("minimumheat", 0);
+        json.addProperty("minimumHeat", 0);
         save();
         return this;
     }

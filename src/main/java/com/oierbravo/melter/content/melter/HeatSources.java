@@ -15,6 +15,7 @@ import java.util.Arrays;
 public enum HeatSources implements StringRepresentable {
     NONE(0,"", "None"),
     TORCH(1,"minecraft:torch", "Torch"),
+    SOUL_TORCH(1,"minecraft:soul_torch", "Soul Torch"),
     WALL_TORCH(1,"minecraft:wall_torch", "Torch"),
     CAMPFIRE(2,"minecraft:campfire", "Campfire"),
     SOUL_CAMPFIRE(2,"minecraft:soul_campfire", "Soul Campfire"),
@@ -46,6 +47,13 @@ public enum HeatSources implements StringRepresentable {
         return resourceName;
     }
 
+    public static HeatSources get(int minimumHeat){
+        return Arrays.stream(HeatSources.values())
+                .filter(e -> e.multiplier > minimumHeat)
+                .findFirst()
+                .orElse(HeatSources.NONE);
+    }
+
     public static HeatSources get(String resourceName){
         return Arrays.stream(HeatSources.values())
                 .filter(e -> e.resourceName.equals(resourceName))
@@ -62,12 +70,12 @@ public enum HeatSources implements StringRepresentable {
         return get(nameString);
     }
 
-    public static HeatSources get(int multiplier){
-        return Arrays.stream(HeatSources.values())
-                .filter(e -> e.multiplier >= multiplier )
-                .findFirst()
-                .orElse(HeatSources.NONE);
-    }
+    //public static HeatSources get(int multiplier){
+    //    return Arrays.stream(HeatSources.values())
+    //            .filter(e -> e.multiplier >= multiplier )
+    //           .findFirst()
+    //            .orElse(HeatSources.NONE);
+    //}
     public static boolean isHeatSource(BlockState blockState){
         if(Melter.withCreate && blockState.hasProperty(BlazeBurnerBlock.HEAT_LEVEL)){
             return true;
