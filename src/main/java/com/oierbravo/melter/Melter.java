@@ -3,22 +3,13 @@ package com.oierbravo.melter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mojang.logging.LogUtils;
-import com.oierbravo.melter.content.melter.MelterBlock;
 import com.oierbravo.melter.registrate.*;
 import com.tterrag.registrate.Registrate;
-<<<<<<< Updated upstream
-import com.tterrag.registrate.util.nullness.NonNullSupplier;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-=======
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraftforge.common.MinecraftForge;
->>>>>>> Stashed changes
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -35,14 +26,6 @@ public class Melter {
 
     public static final String MODID = "melter";
 
-<<<<<<< Updated upstream
-    // public static IEventBus modEventBus;
-    public static Registrate registrate() {
-        return registrate.get();
-    }
-
-    public static final NonNullSupplier<Registrate> registrate = NonNullSupplier.lazy(() -> Registrate.create(MODID));
-=======
     public static final Registrate registrate = Registrate
             .create("melter");
 
@@ -50,7 +33,6 @@ public class Melter {
     private final RegistryEntry<CreativeModeTab> meltercreativetab = registrate.object("melter")
             .defaultCreativeTab(tab -> tab.withLabelColor(0xFF00AA00))
             .register();
->>>>>>> Stashed changes
     public static final boolean withCreate = ModList.get().isLoaded("create");
 
 
@@ -58,36 +40,17 @@ public class Melter {
             .disableHtmlEscaping()
             .create();
 
-<<<<<<< Updated upstream
-   // public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
-
-   // public static ResourceKey<CreativeModeTab> TAB_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation(MODID, MODID));
-   // public static RegistryObject<CreativeModeTab> TAB = CREATIVE_MODE_TABS.register(MODID, () -> {
-    //    return CreativeModeTab.builder()
-    //            .icon(() -> new ItemStack(Items.HOPPER))
-    //            .title(Component.literal("Melter"))
-    //            .build();
-    //});
-
-
-    public Melter() {
-
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-=======
     public  IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
     public Melter() {
         
->>>>>>> Stashed changes
         MinecraftForge.EVENT_BUS.register(this);
 
-
         ModBlocks.register();
+        ModBlockEntities.register();
         ModRecipes.register(modEventBus);
         ModMessages.register();
-        ModBlockEntities.register();
-
-        // CREATIVE_MODE_TABS.register(modEventBus);
+        Config.register();
 
 
         registrate.addRawLang("melter.itemGroup.melter", "Test");
@@ -113,23 +76,9 @@ public class Melter {
     private void afterServerStart(ServerStartedEvent event) {
         MinecraftForge.EVENT_BUS.register(this);
 
-
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onCommonSetup);
-        MinecraftForge.EVENT_BUS.addListener(this::afterServerStart);
     }
 
-    private void onCommonSetup(FMLCommonSetupEvent event) {
-        MinecraftForge.EVENT_BUS.register(this);
-        Config.register();
 
-<<<<<<< Updated upstream
-    }
-
-    private void afterServerStart(ServerStartedEvent event) {
-
-    }
-=======
->>>>>>> Stashed changes
 }
 
 

@@ -10,11 +10,7 @@ import net.minecraftforge.client.model.generators.ConfiguredModel;
 import static com.oierbravo.melter.Melter.registrate;
 
 public class ModBlocks {
-<<<<<<< Updated upstream
-    public static final BlockEntry<MelterBlock> MELTER = registrate().object("melter")
-=======
     public static final BlockEntry<MelterBlock> MELTER = registrate.object("melter")
->>>>>>> Stashed changes
             .block("melter", MelterBlock::new)
             .lang("Melter")
             .blockstate((ctx, prov) ->

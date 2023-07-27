@@ -22,11 +22,7 @@ public class MelterConfig {
         COMMON_BUILDER.comment("Settings for the melter").push("melter");
         MELTER_CAPACITY = COMMON_BUILDER
                 .comment("How much liquid fits into the melter, in mB")
-<<<<<<< Updated upstream
-                .defineInRange("capacity", 1000, 1, Integer.MAX_VALUE);
-=======
                 .defineInRange("capacity", 2000, 1, Integer.MAX_VALUE);
->>>>>>> Stashed changes
         MELTER_FLUID_PER_TICK = COMMON_BUILDER
                 .comment("How much liquid generates per tick, in mB")
                 .defineInRange("liquidPerTick", 2, 1, Integer.MAX_VALUE);

@@ -24,6 +24,9 @@
     "heatesource=soul_campfire": {
       "model": "melter:block/melter_soul_campfire"
     },
+    "heatesource=soul_torch": {
+      "model": "melter:block/melter_soul_torch"
+    },
     "heatesource=torch": {
       "model": "melter:block/melter_torch"
     },

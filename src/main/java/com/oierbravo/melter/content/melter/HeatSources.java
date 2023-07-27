@@ -12,6 +12,7 @@ import java.util.Arrays;
 public enum HeatSources implements StringRepresentable {
     NONE(0,"", "None"),
     TORCH(1,"Block{minecraft:torch}", "Torch"),
+    SOUL_TORCH(1,"Block{minecraft:soul_torch}", "Soul Torch"),
     WALL_TORCH(1,"Block{minecraft:torch}", "Torch"),
     CAMPFIRE(2,"Block{minecraft:campfire}", "Campfire"),
     SOUL_CAMPFIRE(2,"Block{minecraft:soul_campfire}", "Soul Campfire"),

@@ -1,10 +1,7 @@
 {
   "block.melter.melter": "Melter",
   "config.jade.plugin_melter.melter_data": "Melter data",
-<<<<<<< Updated upstream
-=======
   "itemGroup.melter.melter": "Melter",
->>>>>>> Stashed changes
   "melter.block.display": "Melter",
   "melter.itemGroup.melter": "Test",
   "melter.tooltip.multiplier": "Heat multiplier: %d",
