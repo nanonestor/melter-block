@@ -1,12 +1,12 @@
 {
   "type": "melter:melting",
   "ingredient": {
-    "item": "minecraft:snow_block",
+    "tag": "forge:stone",
     "count": 1
   },
   "result": {
-    "fluid": "minecraft:water",
+    "fluid": "minecraft:lava",
     "amount": 250
   },
-  "processingTime": 1000
+  "processingTime": 2000
 }
