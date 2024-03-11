@@ -4,12 +4,12 @@ issueTrackerURL="https://github.com/nanonestor/melter-block/issues"
 license="MIT"
 
 [[mods]]
-modId="melter"
-version="${file.jarVersion}"
-displayName="Melter"
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
 logoFile="logo.png"
 credits="Code inspirtation from the amazing Create mod"
-authors="oierbravo, nanonestor"
+authors="${mod_authors}"
 description='''
 A simple melter block that turn blocks into liquid.
 Intended for modpacks. Use as you see fit.

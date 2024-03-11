@@ -8,6 +8,7 @@ import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Arrays;
@@ -63,6 +64,11 @@ public enum HeatSources implements StringRepresentable {
     public static HeatSources get(BlockState blockState){
         ResourceLocation resourceLocation = blockState.getBlock().getRegistryName();
         String nameString = resourceLocation.toString();
+        if(nameString.equals(HeatSources.CAMPFIRE.getResourceName())){
+            if(!blockState.getValue(BlockStateProperties.LIT)){
+                return HeatSources.NONE;
+            }
+        }
         if(Melter.withCreate && (blockState.hasProperty(BlazeBurnerBlock.HEAT_LEVEL))){
             BlazeBurnerBlock.HeatLevel heatLevel = blockState.getValue(BlazeBurnerBlock.HEAT_LEVEL);
             nameString += ":" +heatLevel.getSerializedName();

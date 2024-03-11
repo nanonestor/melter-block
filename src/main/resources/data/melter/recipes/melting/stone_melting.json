@@ -1,0 +1,12 @@
+{
+  "type": "melter:melting",
+  "ingredient": {
+    "tag": "forge:stone",
+    "count": 1
+  },
+  "result": {
+    "fluid": "minecraft:lava",
+    "amount": 250
+  },
+  "processingTime": 2000
+}

@@ -18,15 +18,15 @@ public class MeltingRecipeProcessing extends RecipeJS {
 
     @Override
     public void deserialize() {
-        inputIngredient = parseIngredientItem(json.get("input"));
-        outputFluid = FluidStackJS.fromJson(json.get("output"));
+        inputIngredient = parseIngredientItem(json.get("ingredient"));
+        outputFluid = FluidStackJS.fromJson(json.get("result"));
     }
 
     @Override
     public void serialize() {
 
-        json.add("input", inputIngredient.toJson());
-        json.add("output",outputFluid.toJson());
+        json.add("ingredient", inputIngredient.toJson());
+        json.add("result",outputFluid.toJson());
     }
     public MeltingRecipeProcessing processingTime(int time) {
         json.addProperty("processingTime", time);

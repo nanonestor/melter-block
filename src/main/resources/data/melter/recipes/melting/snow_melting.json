@@ -1,10 +1,10 @@
 {
   "type": "melter:melting",
-  "input": {
+  "ingredient": {
     "item": "minecraft:snow_block",
     "count": 1
   },
-  "output": {
+  "result": {
     "fluid": "minecraft:water",
     "amount": 250
   },

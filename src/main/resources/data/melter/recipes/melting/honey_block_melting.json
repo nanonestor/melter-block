@@ -1,10 +1,10 @@
 {
   "type": "melter:melting",
-  "input": {
+  "ingredient": {
     "item": "minecraft:honey_block",
     "count": 1
   },
-  "output": {
+  "result": {
     "fluid": "productivebees:honey",
     "amount": 1000
   },

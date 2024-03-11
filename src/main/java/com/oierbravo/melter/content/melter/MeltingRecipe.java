@@ -22,19 +22,19 @@ public class MeltingRecipe implements Recipe<SimpleContainer> {
     //private final NonNullList<FluidStack> output;
     //private final NonNullList<Ingredient> input;
 
-    private final FluidStack output;
-    private final Ingredient input;
+    private final FluidStack result;
+    private final Ingredient ingredient;
 
     private final int processingTime;
     private final int heatlevel;
 
     private final int minimumHeat;
 
-    public MeltingRecipe(ResourceLocation id, FluidStack output,
-                         Ingredient input, int processingTime, int heatlevel, int minimumHeat) {
+    public MeltingRecipe(ResourceLocation id, FluidStack result,
+                         Ingredient ingredient, int processingTime, int heatlevel, int minimumHeat) {
         this.id = id;
-        this.output = output;
-        this.input = input;
+        this.result = result;
+        this.ingredient = ingredient;
         this.processingTime = processingTime;
         this.heatlevel = heatlevel;
         this.minimumHeat = minimumHeat;
@@ -42,12 +42,12 @@ public class MeltingRecipe implements Recipe<SimpleContainer> {
     }
     @Override
     public boolean matches(SimpleContainer pContainer, @NotNull Level pLevel) {
-        return input.test(pContainer.getItem(0));
+        return ingredient.test(pContainer.getItem(0));
     }
     public boolean matches(SimpleContainer pContainer, @NotNull Level pLevel, int heatLevel) {
         if(heatLevel < this.minimumHeat)
             return false;
-        return input.test(pContainer.getItem(0));
+        return ingredient.test(pContainer.getItem(0));
     }
 
     @Override
@@ -84,12 +84,12 @@ public class MeltingRecipe implements Recipe<SimpleContainer> {
     @Override
      public NonNullList<Ingredient> getIngredients() {
         NonNullList<Ingredient> nonnulllist = NonNullList.create();
-        nonnulllist.add(this.input);
+        nonnulllist.add(this.ingredient);
         return nonnulllist;
     }
 
     public Ingredient getIngredient() {
-        return input;
+        return ingredient;
     }
     public int  getProcessingTime() {
         return processingTime;
@@ -97,10 +97,10 @@ public class MeltingRecipe implements Recipe<SimpleContainer> {
 
     public int getHeatLevel() {return heatlevel;}
     public FluidStack getOutputFluidStack() {
-        return output;
+        return result;
     }
     public FluidStack getOutput() {
-        return output;
+        return result;
     }
     private void validate(ResourceLocation recipeTypeId) {
         String messageHeader = "Your custom " + recipeTypeId + " recipe (" + id.toString() + ")";
@@ -134,9 +134,9 @@ public class MeltingRecipe implements Recipe<SimpleContainer> {
         @Override
         public MeltingRecipe fromJson(ResourceLocation id, JsonObject json) {
 
-            FluidStack output = FluidHelper.deserializeFluidStack(GsonHelper.getAsJsonObject(json,"output"));
+            FluidStack output = FluidHelper.deserializeFluidStack(GsonHelper.getAsJsonObject(json,"result"));
 
-            Ingredient input =  Ingredient.fromJson(GsonHelper.getAsJsonObject(json, "input"));
+            Ingredient input =  Ingredient.fromJson(GsonHelper.getAsJsonObject(json, "ingredient"));
             int processingTime = 200;
             if (GsonHelper.isValidNode(json, "processingTime")) {
                 processingTime = GsonHelper.getAsInt(json, "processingTime");
@@ -161,8 +161,8 @@ public class MeltingRecipe implements Recipe<SimpleContainer> {
 
         @Override
         public void toNetwork(FriendlyByteBuf buf, MeltingRecipe recipe) {
-            recipe.input.toNetwork(buf);
-            recipe.output.writeToPacket(buf);
+            recipe.ingredient.toNetwork(buf);
+            recipe.result.writeToPacket(buf);
             buf.writeInt(recipe.getProcessingTime());
             buf.writeInt(recipe.getHeatLevel());
         }
