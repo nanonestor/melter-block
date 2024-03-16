@@ -1,20 +1,20 @@
 modLoader="javafml"
 loaderVersion="[47,)"
 issueTrackerURL="https://github.com/nanonestor/melter-block/issues"
-license="MIT"
+license="${mod_license}"
 
 [[mods]]
-modId="melter"
-version="${file.jarVersion}"
-mod_name="Melter Block"
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
 logoFile="logo.png"
 credits="Code inspirtation from the amazing Create mod"
-mod_authors="oierbravo, nanonestor"
+mod_authors="${mod_authors}"
 description='''
-A fork of the original Melter mod by OierbravoA simple melter block that turn blocks into liquid.
+A fork of the original Melter mod by Oierbravo
 
+A simple melter block that turn blocks into liquid.
 Intended for modpacks. Use as you see fit.
-
 Recipes easily added via datapack or KubeJS - See project Curseforge website or Github for details.
 
 https://www.curseforge.com/minecraft/mc-mods/melter-block

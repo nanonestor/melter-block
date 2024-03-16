@@ -75,7 +75,7 @@ public class MelterBlockEntity extends BlockEntity  {
                 if(!level.isClientSide()) {
                     ModMessages.sendToClients(new ItemStackSyncS2CPacket(this.getStackInSlot(0), worldPosition));
                 }
-               // clientSync();
+                // clientSync();
             }
             @Override
             public boolean isItemValid(int slot, ItemStack stack) {
@@ -183,7 +183,7 @@ public class MelterBlockEntity extends BlockEntity  {
         if (canCraftFluid(pBlockEntity)) {
             pBlockEntity.progress += pBlockEntity.getHeatSourceMultiplier();
             BlockEntity.setChanged(pLevel, pPos, pState);
-           // pBlockEntity.clientSync();
+            // pBlockEntity.clientSync();
             pBlockEntity.maxProgress = pBlockEntity.getProcessingTime(pBlockEntity);
             if (pBlockEntity.progress > pBlockEntity.maxProgress) {
                 MelterBlockEntity.craftFluid(pBlockEntity);
